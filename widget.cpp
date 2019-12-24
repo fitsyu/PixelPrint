@@ -39,6 +39,8 @@ void Widget::setupInterplays() {
 
     connect(this, &Widget::documentFileNameDidSet, this, &Widget::loadDocument);
 
+    connect(this, &Widget::documentDidLoad, this, &Widget::showDocInfo);
+
     connect(this, &Widget::documentDidLoad, this->ui->previewWidget, &QPrintPreviewWidget::updatePreview );
 
     connect(ui->previewWidget, &QPrintPreviewWidget::paintRequested, this, &Widget::previewPages);
@@ -55,7 +57,7 @@ void Widget::openDocument() {
     fileName = QFileDialog::getOpenFileName(this,
                                             "Select a document file",
                                             "",
-                                            "Offices (*.doc, *.docx, *.odt); PDF (*.pdf)"
+                                            "Supported files (*.doc *.docx *.odt *.pdf)"
                                             );
 
     if (fileName.count() > 0) {
@@ -97,8 +99,7 @@ void Widget::previewPages(QPrinter* printer) {
 
     int pagesCount = pdfDoc->numPages();
 
-    ui->pagesCountLabel->setText(QString("Pages: %1").arg(pagesCount));
-
+    // printer->setPageSize(QPageSize(QSize(612, 792)));
 
     QPainter painter(printer);
 
@@ -108,7 +109,6 @@ void Widget::previewPages(QPrinter* printer) {
         // get image
         Poppler::Page* page = pdfDoc->page(p);
         QImage image = page->renderToImage();
-
 
         // sizing
         QRect rect = painter.viewport();
@@ -133,8 +133,16 @@ void Widget::previewPages(QPrinter* printer) {
     emit documentDidRendered();
 }
 
+void Widget::showDocInfo() {
+
+    ui->pagesCountLabel->setText( QString("%1").arg(pdfDoc->numPages()) );
+    ui->titleLabel->setText( pdfDoc->title() );
+    ui->authorLabel->setText( pdfDoc->author() );
+    ui->creatorLabel->setText( pdfDoc->creator() );
+    ui->createdAtLabel->setText( pdfDoc->creationDate().toString(Qt::DateFormat::TextDate) );
+}
+
 void Widget::doneRendering() {
 
     qDebug() << "Done.";
-    delete pdfDoc;
 }

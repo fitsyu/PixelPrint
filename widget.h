@@ -31,6 +31,7 @@ signals:
 private slots:
     void openDocument();
     void loadDocument(QString fileName);
+    void showDocInfo();
     void previewPages(QPrinter *printer);
     void doneRendering();
 
