@@ -34,6 +34,13 @@ Widget::~Widget()
 void Widget::setupLayout() {
 
     ui->openDocumentButton->setFixedHeight(40);
+
+    ui->documentFileNameLabel->setText("no doc");
+    ui->titleLabel->clear();
+    ui->authorLabel->clear();
+    ui->creatorLabel->clear();
+    ui->createdAtLabel->clear();
+    ui->pagesCountLabel->clear();
 }
 
 void Widget::setupInterplays() {
