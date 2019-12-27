@@ -110,6 +110,8 @@ void Widget::checkDocument(QString fileName) {
         connect(soffice, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
             [=](int exitCode, QProcess::ExitStatus exitStatus){
 
+            Q_UNUSED(exitCode)
+
             if (exitStatus != QProcess::NormalExit) {
                 qDebug() << "Doc conversion fails";
             }
