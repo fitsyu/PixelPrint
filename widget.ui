@@ -107,7 +107,7 @@
        <number>0</number>
       </property>
       <item>
-       <layout class="QFormLayout" name="form1">
+       <layout class="QFormLayout" name="formDocumentInfo">
         <property name="sizeConstraint">
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
@@ -208,7 +208,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QFrame" name="frame_2">
+       <widget class="QFrame" name="separatorLine1">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -233,7 +233,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QFormLayout" name="formLayout_3">
+       <layout class="QFormLayout" name="formOptions">
         <property name="labelAlignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
@@ -241,38 +241,38 @@
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
         <item row="0" column="0">
-         <widget class="QLabel" name="label_10">
+         <widget class="QLabel" name="paperPriceLabel">
           <property name="text">
            <string>Paper Price / Piece</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="label_11">
+         <widget class="QLabel" name="BlackInkLabel">
           <property name="text">
            <string>Black Ink Cost</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QLabel" name="label_12">
+         <widget class="QLabel" name="printInColorLabel">
           <property name="text">
            <string>Print In Color</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="paperPriceLineEdit"/>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_3">
+         <widget class="QLineEdit" name="blackInkCostLineEdit">
           <property name="clearButtonEnabled">
            <bool>true</bool>
           </property>
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="printInColorSwitch">
           <property name="text">
            <string>Yes</string>
           </property>
@@ -288,19 +288,19 @@
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="colorInkLabel">
           <property name="text">
            <string>Color Ink Cost</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="colorInkCostLineEdit"/>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QFrame" name="frame">
+       <widget class="QFrame" name="separatorLine2">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -331,39 +331,100 @@
        </widget>
       </item>
       <item>
-       <layout class="QFormLayout" name="formLayout_2">
+       <layout class="QFormLayout" name="formPricing">
         <property name="labelAlignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
         <property name="formAlignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_6">
+        <item row="2" column="0">
+         <widget class="QLabel" name="pixels">
           <property name="text">
            <string>Pixels</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Total Pixels Count</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>Papers</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="1">
-         <widget class="QLabel" name="label_9">
+         <widget class="QLabel" name="totalPixelsCountLabel">
           <property name="text">
-           <string>Total Papers Count</string>
+           <string>TotalPixelsCountLabel</string>
           </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="price">
+          <property name="text">
+           <string>Price</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="finalPriceLabel">
+          <property name="text">
+           <string>FinalPriceLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <row>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Page</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Size</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Pixels</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Price</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item row="0" column="1">
+           <property name="text">
+            <string>390x219 (A4)</string>
+           </property>
+          </item>
+          <item row="0" column="2">
+           <property name="text">
+            <string>578721</string>
+           </property>
+          </item>
+          <item row="0" column="3">
+           <property name="text">
+            <string>Rp 126</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>
