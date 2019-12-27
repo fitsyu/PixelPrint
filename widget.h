@@ -25,11 +25,13 @@ private:
 
 signals:
     void documentFileNameDidSet(QString);
+    void documentDidChecked(QString);
     void documentDidLoad();
     void documentDidRendered();
 
 private slots:
     void openDocument();
+    void checkDocument(QString fileName);
     void loadDocument(QString fileName);
     void showDocInfo();
     void previewPages(QPrinter *printer);

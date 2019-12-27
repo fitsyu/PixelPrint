@@ -8,6 +8,8 @@
 
 #include <poppler-qt5.h>
 
+#include <QProcess>
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -20,8 +22,9 @@ Widget::Widget(QWidget *parent) :
     setupInterplays();
 
     // remove this ato de ne
-    loadDocument("/Users/fitsyu/Desktop/cnds.pdf");
+    //    loadDocument("/Users/fitsyu/Desktop/cnds.pdf");
 }
+
 
 Widget::~Widget()
 {
@@ -37,7 +40,9 @@ void Widget::setupInterplays() {
 
     connect(ui->openDocumentButton, &QPushButton::clicked, this, &Widget::openDocument);
 
-    connect(this, &Widget::documentFileNameDidSet, this, &Widget::loadDocument);
+    connect(this, &Widget::documentFileNameDidSet, this, &Widget::checkDocument);
+
+    connect(this, &Widget::documentDidChecked, this, &Widget::loadDocument);
 
     connect(this, &Widget::documentDidLoad, this, &Widget::showDocInfo);
 
@@ -60,12 +65,67 @@ void Widget::openDocument() {
                                             "Supported files (*.doc *.docx *.odt *.pdf)"
                                             );
 
+
+
     if (fileName.count() > 0) {
 
         ui->documentFileNameLabel->setText(fileName);
 
         // done
         emit documentFileNameDidSet(fileName);
+    }
+}
+
+void Widget::checkDocument(QString fileName) {
+
+    QFileInfo fileInfo(fileName);
+    bool isPDF = fileInfo.suffix() == "pdf";
+
+    if (!isPDF) {
+
+        // the converted file would be in temp dir
+        QString convertedFileName = QDir::tempPath() + QDir::separator() +fileInfo.baseName() + ".pdf";
+
+        // prepare for conversion process
+        QProcess* soffice = new QProcess(this);
+
+        // read output
+        connect(soffice, &QProcess::readyRead, [=]() {
+            qDebug() << "READ" << soffice->readLine();
+        });
+
+        // read error
+        connect(soffice, &QProcess::errorOccurred, [=]() {
+            qDebug() << "eh err aw: " << soffice->errorString();
+        });
+
+        // on finished
+        connect(soffice, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+            [=](int exitCode, QProcess::ExitStatus exitStatus){
+
+            if (exitStatus != QProcess::NormalExit) {
+                qDebug() << "Doc conversion fails";
+            }
+
+            // done
+            emit documentDidChecked(convertedFileName);
+
+            delete soffice;
+        });
+
+        // convert to PDF!
+        soffice->start("/usr/local/bin/soffice",
+                       QStringList()
+                       << "--convert-to"
+                       << "pdf"
+                       << fileName
+                       << "--outdir"
+                       << QDir::tempPath() );
+
+    } else {
+
+        // already pdf
+        emit documentDidChecked(fileName);
     }
 }
 
