@@ -11,18 +11,18 @@
 #include <QProcess>
 
 Widget::Widget(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Widget)
+QWidget(parent),
+ui(new Ui::Widget)
 {
     ui->setupUi(this);
-
-
+    
     setupLayout();
-
+    
     setupInterplays();
-
-    // remove this ato de ne
-    //    loadDocument("/Users/fitsyu/Desktop/cnds.pdf");
+    
+    // TODO: remove this ato de ne
+        checkDocument("/Users/fitsyu/Desktop/cnds.pdf");
+//    pdfDoc = nullptr;
 }
 
 
@@ -58,7 +58,11 @@ void Widget::setupInterplays() {
     connect(ui->previewWidget, &QPrintPreviewWidget::paintRequested, this, &Widget::previewPages);
 
     connect(this, &Widget::documentDidRendered, this, &Widget::doneRendering);
-
+    
+    connect(this, &Widget::documentDidRendered, this, &Widget::calculateDocumentPrice);
+    
+    connect(this, &Widget::documentPriceCalculated, this, &Widget::showDocumentPrice);
+    
     connect(ui->printButton, &QPushButton::clicked, ui->previewWidget, &QPrintPreviewWidget::print);
 }
 
@@ -215,3 +219,78 @@ void Widget::doneRendering() {
 
     qDebug() << "Done.";
 }
+
+void Widget::calculateDocumentPrice() {
+    
+    if ( pdfDoc == nullptr ) return;
+    
+    int pagesCount = pdfDoc->numPages();
+    
+    QList<PagePrice> prices;
+    
+    for (int p=0; p<pagesCount; p++) {
+        
+        // get image
+        Poppler::Page* page = pdfDoc->page(p);
+        QImage image = page->renderToImage();
+        
+        prices << calculatePriceFor(&image);
+    }
+    
+    // get grand total price
+    DocumentPrice docPrice;
+    docPrice.listOfpagePrice = prices;
+    
+    // save
+    this->docPrice = docPrice;
+    
+    // done
+    emit documentPriceCalculated();
+}
+
+PagePrice Widget::calculatePriceFor(QImage* image) {
+    
+    PagePrice pagePrice;
+    pagePrice.options = PricingOptions();
+    
+    // inspect the image
+    QSize size = image->size();
+    pagePrice.paperSize = QPageSize(size);
+    
+    // fix grayscale by dithering
+    if (image->isGrayscale()) {
+        *image = (image->convertToFormat(QImage::Format_Mono, Qt::MonoOnly));
+    }
+    
+    int blackPixels = 0;
+    int colorPixels = 0;
+    
+    for(int row=0; row<size.width(); row++){
+        for(int col=0; col<size.height(); col++){
+            
+            QColor pixel = image->pixel(row, col);
+            
+            // only colored ones get counted
+            if (pixel != Qt::white) {
+                if (pixel == Qt::black)
+                    blackPixels += 1;
+                else
+                    colorPixels += 1;
+            }
+        }
+    }
+    
+    pagePrice.blackPixels = blackPixels;
+    pagePrice.colorPixels = colorPixels;
+    
+    return pagePrice;
+}
+
+void Widget::showDocumentPrice() { 
+    
+    ui->tableView->setModel( new PriceBreakdownModel(docPrice) );
+    QString localPrice = QLocale().toCurrencyString(docPrice.totalPrice());
+    ui->finalPriceLabel->setText( localPrice );
+}
+
+
