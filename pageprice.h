@@ -5,7 +5,7 @@
 #include <QPageSize>
 
 struct PagePrice {
-
+    
     qreal blackPrice()  {
         return blackPixels * options.blackInkPrice;
     }
@@ -17,10 +17,10 @@ struct PagePrice {
     qreal totalPrice()  {
         return options.paperPrice + blackPrice() + colorPrice();
     }
-
+    
 public:
     PricingOptions options;
-
+    
     QPageSize paperSize;
     int blackPixels = 0;
     int colorPixels = 0;

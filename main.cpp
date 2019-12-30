@@ -7,6 +7,6 @@ int main(int argc, char *argv[])
 
     Widget w;
     w.showFullScreen();
-
+    
     return a.exec();
 }
