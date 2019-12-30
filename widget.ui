@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>720</height>
+    <width>987</width>
+    <height>725</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -93,6 +93,18 @@
    </item>
    <item>
     <widget class="QWidget" name="SummaryWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>2000</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="leftMargin">
        <number>0</number>
@@ -257,7 +269,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="printInColorLabel">
           <property name="text">
-           <string>Print In Color</string>
+           <string>Print All In Color</string>
           </property>
          </widget>
         </item>
@@ -266,6 +278,9 @@
         </item>
         <item row="1" column="1">
          <widget class="QLineEdit" name="blackInkCostLineEdit">
+          <property name="text">
+           <string>0.010</string>
+          </property>
           <property name="clearButtonEnabled">
            <bool>true</bool>
           </property>
@@ -295,7 +310,11 @@
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="colorInkCostLineEdit"/>
+         <widget class="QLineEdit" name="colorInkCostLineEdit">
+          <property name="text">
+           <string>0.015</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -367,64 +386,19 @@
          </widget>
         </item>
         <item row="1" column="0" colspan="2">
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableView" name="tableView">
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
-          <attribute name="horizontalHeaderCascadingSectionResizes">
+          <attribute name="horizontalHeaderHighlightSections">
            <bool>false</bool>
           </attribute>
-          <attribute name="horizontalHeaderStretchLastSection">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
+          <attribute name="verticalHeaderCascadingSectionResizes">
            <bool>false</bool>
           </attribute>
-          <row>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>Page</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Size</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Pixels</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Price</string>
-           </property>
-          </column>
-          <item row="0" column="0">
-           <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item row="0" column="1">
-           <property name="text">
-            <string>390x219 (A4)</string>
-           </property>
-          </item>
-          <item row="0" column="2">
-           <property name="text">
-            <string>578721</string>
-           </property>
-          </item>
-          <item row="0" column="3">
-           <property name="text">
-            <string>Rp 126</string>
-           </property>
-          </item>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>24</number>
+          </attribute>
          </widget>
         </item>
        </layout>
