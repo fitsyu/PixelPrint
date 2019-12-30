@@ -33,9 +33,9 @@
 		A99B2AA0F9CBBDD12BA126A4 /* DiskArbitration.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2B774D8E4178765CE52EAAF5 /* DiskArbitration.framework */; };
 		AC551A06177DF843C3EAD379 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = E2C1E459F9602B7D0981AD5C /* QtGui.framework */; };
 		AC9171D24A68F84B521721E0 /* pricebreakdownmodel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = AD69C76C089D758921C1F946 /* pricebreakdownmodel.cpp */; settings = {ATTRIBUTES = (); }; };
-		CB5375420D9F1DA365E15BBD /* moc_widget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 16A620B33F25B8037C82D11F /* moc_widget.cpp */; settings = {ATTRIBUTES = (); }; };
 		D90A3EC7066C50B001B24F68 /* QtPrintSupport.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = AB1097651DC691D6596A5195 /* QtPrintSupport.framework */; };
 		E45E51A644D5FC9F942ECE55 /* AGL.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 8D9815BDB5BD9F90D2BC05C5 /* AGL.framework */; };
+		E87F46B623BA3874006721BE /* moc_widget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = E87F46B523BA3873006721BE /* moc_widget.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +63,6 @@
 
 /* Begin PBXFileReference section */
 		0B90255841C5A62E11C47ECC /* pricebreakdownmodel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pricebreakdownmodel.h; path = /Users/fitsyu/Projects/Qt/PixelPrint/pricebreakdownmodel.h; sourceTree = "<absolute>"; };
-		16A620B33F25B8037C82D11F /* moc_widget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_widget.cpp; path = /Users/fitsyu/Projects/Qt/PixelPrint/moc_widget.cpp; sourceTree = "<absolute>"; };
 		2B774D8E4178765CE52EAAF5 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = /System/Library/Frameworks/DiskArbitration.framework; sourceTree = "<absolute>"; };
 		2C6D808E8B2E14AEE20B9900 /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = /Users/fitsyu/Qt5.12.3/5.12.3/clang_64/lib/QtWidgets.framework; sourceTree = "<absolute>"; };
 		46C0342C269E4B00121A09AF /* ui_widget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ui_widget.h; path = /Users/fitsyu/Projects/Qt/PixelPrint/ui_widget.h; sourceTree = "<absolute>"; };
@@ -84,6 +83,7 @@
 		E13091F1F73D89560E8C02F3 /* pageprice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pageprice.h; path = /Users/fitsyu/Projects/Qt/PixelPrint/pageprice.h; sourceTree = "<absolute>"; };
 		E2C1E459F9602B7D0981AD5C /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Users/fitsyu/Qt5.12.3/5.12.3/clang_64/lib/QtGui.framework; sourceTree = "<absolute>"; };
 		E76D7CF3F84D6FF6B7DF9B54 /* PixelPrint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelPrint.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E87F46B523BA3873006721BE /* moc_widget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = moc_widget.cpp; sourceTree = "<group>"; };
 		F884E18E48F3FD941D44CAB2 /* documentprice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = documentprice.h; path = /Users/fitsyu/Projects/Qt/PixelPrint/documentprice.h; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +119,7 @@
 		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
 			isa = PBXGroup;
 			children = (
-				16A620B33F25B8037C82D11F /* moc_widget.cpp */,
+				E87F46B523BA3873006721BE /* moc_widget.cpp */,
 				46C0342C269E4B00121A09AF /* ui_widget.h */,
 			);
 			name = "Generated Sources";
@@ -291,10 +291,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E87F46B623BA3874006721BE /* moc_widget.cpp in Compile Sources */,
 				903E41D419015E31D3466033 /* main.cpp in Compile Sources */,
 				AC9171D24A68F84B521721E0 /* pricebreakdownmodel.cpp in Compile Sources */,
 				A2F9471FCA48778BABEDDC2E /* widget.cpp in Compile Sources */,
-				CB5375420D9F1DA365E15BBD /* moc_widget.cpp in Compile Sources */,
 				1CFB2E955CEE0236B0EBCC7B /* dummy.cpp in Compile Sources */,
 			);
 			name = "Compile Sources";
