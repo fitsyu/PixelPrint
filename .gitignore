@@ -1,0 +1,7 @@
+.xcode/
+Debug/
+moc_widget.cpp
+PixelPrint.xcodeproj/project.xcworkspace/*
+PixelPrint.xcodeproj/project.xcworkspace/xcuserdata/fitsyu.xcuserdatad/UserInterfaceState.xcuserstate
+**/*.DS_Store
+PixelPrint.xcodeproj/project.xcworkspace/xcuserdata/fitsyu.xcuserdatad/UserInterfaceState.xcuserstate
