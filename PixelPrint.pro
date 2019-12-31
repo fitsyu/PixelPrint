@@ -26,9 +26,14 @@ CONFIG += c++11 sdk_no_version_check
 
 SOURCES += \
         main.cpp \
+        pricebreakdownmodel.cpp \
         widget.cpp
 
 HEADERS += \
+        documentprice.h \
+        pageprice.h \
+        pricebreakdownmodel.h \
+        pricingoptions.h \
         widget.h
 
 FORMS += \
