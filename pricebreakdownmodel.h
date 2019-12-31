@@ -14,7 +14,7 @@ public:
     
     int columnCount(const QModelIndex &parent = QModelIndex()) const {
         Q_UNUSED(parent)
-        return 8;
+        return headers.count();
     }
     
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const {
@@ -69,51 +69,24 @@ public:
         
         if (role != Qt::DisplayRole || orientation == Qt::Vertical) return QVariant();
         
-        QVariant dat;
-        switch(section) {
-                
-            case 0:
-                dat = "Page";
-                break;
-                
-            case 1:
-                dat = "Paper Size";
-                break;
-                
-            case 2:
-                dat = "Paper Price";
-                break;
-                
-            case 3:
-                dat = "Black Pixels";
-                break;
-                
-            case 4:
-                dat = "Black Price";
-                break;
-                
-            case 5:
-                dat = "Color Pixels";
-                break;
-                
-            case 6:
-                dat = "Color Price";
-                break;
-                
-            case 7:
-                dat = "Total Price";
-                break;
-                
-            default:
-                break;
-        }
+        QString header = headers.at(section);
         
-        return dat;
+        return header;
     }
     
     PriceBreakdownModel(DocumentPrice documentPrice) {
         this->documentPrice = documentPrice;
         QLocale::setDefault(QLocale(QLocale::Indonesian, QLocale::Indonesia));
+        headers = QStringList()
+        << "Page"
+        << "Paper Size"
+        << "Paper Price"
+        << "Black Pixels"
+        << "Black Price"
+        << "Color Pixels"
+        << "Color Price"
+        << "Total Price"
+        ;
     }
     
     virtual ~PriceBreakdownModel();
@@ -122,6 +95,7 @@ public:
 private:
     DocumentPrice documentPrice;
     QLocale local;
+    QStringList headers;
 };
 
 #endif // PRICINGTABLEMODEL_H
